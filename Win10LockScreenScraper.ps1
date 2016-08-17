@@ -1,5 +1,6 @@
 #
 # Win10LockScreenScraper
+# dotjrich
 #
 
 # As of 8/14/2016, this is where the images are stored.
