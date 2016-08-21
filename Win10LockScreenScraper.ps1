@@ -30,8 +30,11 @@ ForEach-Object {
 
     # If we've found an image with the proper resolution and we haven't copied it, copy it.
     if ($imageOrientation -ne "") {
+        # I've noticed that the same image can have different names of different computers. Let's use the hash for our name, so we don't have dupes.
+        $imageHash = (Get-FileHash -Algorithm SHA1 $_.FullName).Hash
+
         # TODO: I've noticed that some of the images actually have information in the metadata (name, location, etc). We can use that for the file name.
-        $destinationFile = "$destinationDirectory/$_-$imageOrientation.jpg"
+        $destinationFile = "$destinationDirectory/$imageHash-$imageOrientation.jpg"
         if (-not (Test-Path -Path $destinationFile)) {
             Copy-Item -Path $_.FullName -Destination $destinationFile
         }
